@@ -11,7 +11,7 @@ app.use(
   }),
 );
 
-// parse JSON bodies
+// parse JSON bodie's
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
