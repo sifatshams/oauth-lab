@@ -1,7 +1,10 @@
 import { definePrismaConfig } from '@prisma/cli-engine';
 import { defineConfig as ormConfig } from '@prisma/orm-postgres/config';
 import 'dotenv/config';
-import process from 'node:process';
+
+declare const process: {
+  env: Record<string, string | undefined>;
+};
 
 export default definePrismaConfig({
   orm: ormConfig({
