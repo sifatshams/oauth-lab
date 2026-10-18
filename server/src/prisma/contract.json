@@ -18,7 +18,7 @@
               "createdAt": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "kind": "scalar"
                 }
               },
@@ -86,7 +86,7 @@
             "User": {
               "columns": {
                 "createdAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "dataType": "pg/timestamptz",
                   "default": {
                     "expression": "now()",
@@ -136,7 +136,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "7a03a04a442fb894f3a97eb7998c928b8df8dfb7c4c5b169a56cdc808a18b97e"
+    "storageHash": "6d7982a6aa7384d878f7534244e2c0d5930f92369d7b3ddd4c7842d44f256cf4"
   },
   "execution": {
     "executionHash": "6af348abd699e1b0a0e911a7d2da008ff3a1d475a3fb1b36540365f78ad570d0",
