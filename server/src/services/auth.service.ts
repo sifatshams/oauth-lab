@@ -59,3 +59,17 @@ export const loginUser = async (input: LoginInput) => {
   const { password: _password, ...safeUser } = user;
   return safeUser;
 };
+
+// find or get user by id
+export const getUserById = async (id: string) => {
+  const user = await db.orm.public.User.first({ id });
+
+  // if user not found?
+  if (!user) {
+    throw new AppError(401, 'User not found');
+  }
+
+  const { password: _password, ...safeUser } = user;
+
+  return safeUser;
+};
