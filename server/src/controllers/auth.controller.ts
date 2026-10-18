@@ -1,5 +1,6 @@
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 import { COOKIE_NAME, cookieOptions } from '../config/cookie.js';
+import { db } from '../prisma/db.js';
 import { loginUser, registerUser } from '../services/auth.service.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { generateToken } from '../utils/jwt.util.js';
@@ -51,3 +52,17 @@ export const loginController = asyncHandler(async (req, res) => {
     'Logged in successfully',
   );
 });
+
+// authenticated user profile controller
+export const meController = asyncHandler(
+  async (req: Request, res: Response) => {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ success: false, message: 'Unauthorized' });
+    }
+
+    const user = await db.orm.public.User.first({ id: req.user.id });
+
+    // success res
+    return res.status(200).json({ success: true, user });
+  },
+);
