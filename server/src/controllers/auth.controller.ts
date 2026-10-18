@@ -66,3 +66,20 @@ export const meController = asyncHandler(
     return res.status(200).json({ success: true, user });
   },
 );
+
+// logout user controller
+export const logoutController = asyncHandler(async (_req, res) => {
+  // clear cookie
+  res.clearCookie(COOKIE_NAME, {
+    httpOnly: cookieOptions.httpOnly,
+    secure: cookieOptions.secure,
+    sameSite: cookieOptions.sameSite,
+    path: cookieOptions.path,
+  });
+
+  // success res
+  return res.status(200).json({
+    success: true,
+    message: 'Logged out successfully',
+  });
+});
