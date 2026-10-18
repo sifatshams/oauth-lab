@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { AppError } from '../middleware/error.middleware.js';
 import { db } from '../prisma/db.js';
-import { RegisterInput } from '../validators/auth.validator.js';
+import { LoginInput, RegisterInput } from '../validators/auth.validator.js';
 
 // salt round
 const SALT_ROUNDS = 12;
@@ -35,4 +35,27 @@ export const registerUser = async (input: RegisterInput) => {
     }
     throw error;
   }
+};
+
+// login user service
+export const loginUser = async (input: LoginInput) => {
+  const user = await db.orm.public.User.first({
+    email: input.email,
+  });
+
+  // if user not here
+  if (!user) {
+    throw new AppError(401, 'Invalid email or password');
+  }
+
+  // compare passcode
+  const passwordMatches = await bcrypt.compare(input.password, user.password);
+
+  // if passcode not match?
+  if (!passwordMatches) {
+    throw new AppError(401, 'Invalid email or password');
+  }
+
+  const { password: _password, ...safeUser } = user;
+  return safeUser;
 };
