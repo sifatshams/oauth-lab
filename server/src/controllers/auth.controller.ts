@@ -1,9 +1,12 @@
 import type { Response } from 'express';
 import { COOKIE_NAME, cookieOptions } from '../config/cookie.js';
-import { registerUser } from '../services/auth.service.js';
+import { loginUser, registerUser } from '../services/auth.service.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { generateToken } from '../utils/jwt.util.js';
-import { validateRegister } from '../validators/auth.validator.js';
+import {
+  validateLogin,
+  validateRegister,
+} from '../validators/auth.validator.js';
 
 // send auth response
 const sendAuthResponse = (
@@ -32,5 +35,19 @@ export const registerController = asyncHandler(async (req, res) => {
     { ...user, id: user.id },
     201,
     'Account created successfully',
+  );
+});
+
+// login user controller
+export const loginController = asyncHandler(async (req, res) => {
+  const input = validateLogin(req.body);
+  const user = await loginUser(input);
+
+  // send auth res
+  return sendAuthResponse(
+    res,
+    { ...user, id: user.id },
+    200,
+    'Logged in successfully',
   );
 });
