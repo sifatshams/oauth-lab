@@ -22,7 +22,7 @@ const sendAuthResponse = (
 };
 
 // user register controler
-export const registerControlle = asyncHandler(async (req, res) => {
+export const registerController = asyncHandler(async (req, res) => {
   const input = validateRegister(req.body);
   const user = await registerUser(input);
 
