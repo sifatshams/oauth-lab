@@ -1,18 +1,23 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import { env } from './config/env.js';
+import { errorMiddleware } from './middleware/error.middleware.js';
+import authRouter from './routes/auth.routes.js';
 
 const app = express();
 
+app.disable('x-powered-by');
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: env.CLIENT_URL || 'http://localhost:3000',
     credentials: true,
   }),
 );
 
 // parse JSON bodie's
-app.use(express.json());
+app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,5 +28,19 @@ app.get('/', (_req, res) => {
     message: 'Server is running...',
   });
 });
+
+// api endpoint
+app.use('/api/auth', authRouter);
+
+// 404
+app.use((_req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+  });
+});
+
+// err handler
+app.use(errorMiddleware);
 
 export default app;
