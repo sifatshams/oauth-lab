@@ -5,6 +5,7 @@ import axiosInstance from '../lib/axios';
 import {
   AuthResponse,
   CurrentUserResponse,
+  LoginPayload,
   RegisterPayload,
 } from '../types/auth';
 
@@ -35,6 +36,28 @@ export function useRegister() {
       return data;
     },
 
+    onSuccess: (data) => {
+      queryClient.setQueryData(AUTH_QUERY_KEY, {
+        success: true,
+        user: data.user,
+      });
+    },
+  });
+}
+
+// login query
+export function useLogin() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (payload: LoginPayload) => {
+      const { data } = await axiosInstance.post<AuthResponse>(
+        '/auth/login',
+        payload,
+      );
+
+      return data;
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(AUTH_QUERY_KEY, {
         success: true,
