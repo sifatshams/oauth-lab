@@ -130,7 +130,7 @@ export default function registerForm() {
               type="button"
               aria-label={showPassword ? 'Hide password' : 'Show password'}
               onClick={() => setShowPassword((value) => !value)}
-              className="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-white"
+              className="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-white cursor-pointer"
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
@@ -145,7 +145,7 @@ export default function registerForm() {
         <button
           type="submit"
           disabled={registerMutation.isPending}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 px-4 py-3 font-semibold text-white transition hover:bg-indigo-400 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 px-4 py-3 font-semibold text-white transition hover:bg-indigo-400 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
         >
           {registerMutation.isPending ? (
             <LoaderCircle className="animate-spin" size={18} />
