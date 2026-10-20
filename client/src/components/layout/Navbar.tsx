@@ -47,7 +47,7 @@ export default function Navbar() {
               <button
                 onClick={handleLogout}
                 disabled={logoutMutation.isPending}
-                className="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-300 transition hover:border-rose-400/30 hover:bg-rose-500/10 hover:text-rose-300 disabled:opacity-60"
+                className="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-300 transition hover:border-rose-400/30 hover:bg-rose-500/10 hover:text-rose-300 disabled:opacity-60 cursor-pointer"
               >
                 <LogOut size={16} />
                 <span>
