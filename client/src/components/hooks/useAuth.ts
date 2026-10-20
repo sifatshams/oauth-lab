@@ -66,3 +66,20 @@ export function useLogin() {
     },
   });
 }
+
+// logout query
+export function useLogout() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
+      const { data } = await axiosInstance.post('/auth/logout');
+      return data;
+    },
+
+    onSuccess: () => {
+      queryClient.setQueryData(AUTH_QUERY_KEY, null);
+      queryClient.clear();
+    },
+  });
+}
