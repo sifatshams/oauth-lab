@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import { env } from './config/env.js';
+import passport from './config/passport.js';
 import { errorMiddleware } from './middleware/error.middleware.js';
 import authRouter from './routes/auth.routes.js';
 
@@ -15,6 +16,7 @@ app.use(
     credentials: true,
   }),
 );
+app.use(passport.initialize());
 
 // parse JSON bodie's
 app.use(express.json({ limit: '10kb' }));
