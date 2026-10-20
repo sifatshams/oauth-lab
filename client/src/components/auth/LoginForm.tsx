@@ -21,6 +21,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 const inputClass =
   'w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20';
 
+// login form
 export default function LoginForm() {
   const router = useRouter();
   const loginMutation = useLogin();
@@ -57,6 +58,7 @@ export default function LoginForm() {
       footerLinkHref="/register"
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        {/* email */}
         <div>
           <label
             htmlFor="email"
@@ -79,6 +81,7 @@ export default function LoginForm() {
           )}
         </div>
 
+        {/* password */}
         <div>
           <label
             htmlFor="password"
@@ -114,6 +117,7 @@ export default function LoginForm() {
           )}
         </div>
 
+        {/* sign in button */}
         <button
           type="submit"
           disabled={loginMutation.isPending}
